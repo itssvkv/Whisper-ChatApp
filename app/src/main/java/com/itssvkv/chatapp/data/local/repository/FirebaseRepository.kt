@@ -1,0 +1,1 @@
+package com.itssvkv.chatapp.data.local.repositoryimport com.google.firebase.firestore.DocumentReferenceimport com.itssvkv.chatapp.models.UserDataInfointerface FirebaseRepository {    suspend fun currentUserId(): String?    suspend fun currentUserDetails(): DocumentReference}

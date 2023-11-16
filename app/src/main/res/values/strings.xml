@@ -1,0 +1,43 @@
+<resources>
+    <string name="app_name">Whisper</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="splash">splash</string>
+    <string name="skip">Skip</string>
+    <string name="next">Next</string>
+    <string name="dots">- - - - -</string>
+    <string name="welcome_message">Welcome</string>
+    <string name="first_dis">"Welcome to Whisper! Connect and chat with ease.\nHello! Ready to start chatting? Let's get you set up!"
+    </string>
+
+    <string name="key_features">Key Features</string>
+    <string name="second_dis">"Send and receive messages in real-time. \n
+        Chat with friends anytime, anywhere."</string>
+    <string name="call_to_action">Call to Action</string>
+    <string name="third_dis">"Tap Start to begin your first conversation.\n Hit Get Started and connect with friends!"</string>
+    <string name="note">Note: Our authentication is done via a browser because the api does not provide it.</string>
+    <string name="sign_in">Sign In</string>
+    <string name="line">________</string>
+    <string name="don_t_have_an_account">Don\'t have an account?</string>
+    <string name="sing_up">Sing Up</string>
+    <string name="back">Back</string>
+    <string name="search">Search…</string>
+    <string name="trending_tags">Trending tags</string>
+    <string name="category">Category</string>
+    <string name="verify_number_tv">Please Enter Your Number To Verify Your Account</string>
+    <string name="verify_otp_tv">Please Enter The Verification Code</string>
+    <string name="verify_number_bold_tv">Verify Your Number</string>
+    <string name="verify_otp_bold_tv">Verification Code</string>
+    <string name="_1">+1</string>
+    <string name="number">Number..</string>
+    <string name="code">code..</string>
+    <string name="send">Send</string>
+    <string name="verify">Verify</string>
+    <string name="create_account">Create Account</string>
+    <string name="please_enter_your_name">please enter your name</string>
+    <string name="name">name…</string>
+    <string name="about_you">About You</string>
+    <string name="status">Status</string>
+    <string name="create">Create</string>
+    <string name="helloMessage">Hello: %1$s</string>
+</resources>

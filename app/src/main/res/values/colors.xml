@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="baseColor" >#FFD4D8DF</color>
+    <color name="appNameColor">#FF486B87</color>
+    <color name="dots">#707070</color>
+    <color name="onBoardingBgColor">#010C1E</color>
+    <color name="onBoardingBtnColor">#4a6d88</color>
+    <color name="editText">#E8E6E6</color>
+</resources>

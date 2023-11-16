@@ -1,0 +1,1 @@
+package com.itssvkv.chatapp.modelsdata class Chats(    val firstChat: String)

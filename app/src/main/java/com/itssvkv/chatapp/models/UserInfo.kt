@@ -1,0 +1,1 @@
+package com.itssvkv.chatapp.modelsimport com.google.firebase.Timestampdata class UserInfo(    val name : String,    val phone : String,    val status : String,    val timestamp: Timestamp)

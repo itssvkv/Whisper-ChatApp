@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".ui.onboarding.pager.SecondFragment">
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/secondIv"
+        android:layout_width="300dp"
+        android:layout_height="300dp"
+        android:layout_marginTop="50dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/second_fragment_iv"
+        android:scaleType="fitXY"
+        app:shapeAppearanceOverlay="@style/roundedImg"/>
+
+    <TextView
+        android:id="@+id/secondBoldTv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/secondIv"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="50dp"
+        android:text="@string/key_features"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        tools:text="@string/key_features"
+        tools:textColor="@color/onBoardingBgColor"
+        android:textColor="@color/onBoardingBgColor"/>
+
+    <TextView
+        android:id="@+id/secondTv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/secondBoldTv"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="19dp"
+        android:text="@string/second_dis"
+        android:paddingHorizontal="33dp"
+        android:textSize="15sp"
+        android:gravity="center"
+        tools:text="@string/second_dis"
+        tools:textColor="@color/onBoardingBgColor"
+        android:textColor="@color/onBoardingBgColor"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
