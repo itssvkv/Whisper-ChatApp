@@ -1,53 +1,53 @@
 package com.itssvkv.chatapp.ui.home
 
-import android.net.Uri
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import com.bumptech.glide.Glide
 import com.itssvkv.chatapp.R
-import com.itssvkv.chatapp.data.local.repository.FirebaseRepository
 import com.itssvkv.chatapp.databinding.FragmentHomeBinding
-import com.itssvkv.chatapp.utils.Common.TAG
+import com.itssvkv.chatapp.utils.CallState
+import com.itssvkv.chatapp.utils.Common
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
-import javax.inject.Inject
 
 @AndroidEntryPoint
 class HomeFragment : Fragment() {
 
     private var binding: FragmentHomeBinding? = null
-
-    @Inject
-    lateinit var firebaseRepo: FirebaseRepository
+    private val homeViewModel by viewModels<HomeViewModel>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentHomeBinding.inflate(inflater, container, false)
-        init()
+        getDataFromFirebase()
+        observeOnFirebaseData()
         return binding?.root
     }
 
-    private fun init() {
+    private fun getDataFromFirebase() {
         lifecycleScope.launch {
-            firebaseRepo.currentUserDetails().get().addOnCompleteListener { task ->
-                if (task.isSuccessful) {
-                    val name = task.result.get("name") as String
-                    val image = task.result.get("profilePhoto") as String
-                    Log.d(TAG, "init: $name")
-                    val helloMessage = resources.getString(R.string.helloMessage, name)
-                    binding?.helloMessage?.text = helloMessage
-                    Glide.with(requireContext()).load(image).into(binding?.image!!)
-                }
-            }
+            homeViewModel.getDataFromFirebase()
         }
     }
 
-
+    private fun observeOnFirebaseData() {
+        lifecycleScope.launch {
+            homeViewModel.userInfo.observe(viewLifecycleOwner) { task ->
+                val name = task.result.get("name") as String
+                val image = task.result.get("profilePhoto")
+                binding?.helloMessage?.text = resources.getString(
+                    R.string.helloMessage, name
+                )
+                Glide.with(requireContext()).load(image).into(binding?.image!!)
+            }
+        }
+    }
 }
