@@ -17,6 +17,10 @@
         <item name="cornerFamily">rounded</item>
         <item name="cornerSize">35dp</item>
     </style>
+    <style name="userProfileImg">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">20dp</item>
+    </style>
 
     <style name="AppTheme.NoActionBar" parent="Theme.AppCompat.Light.DarkActionBar">
         <item name="windowActionBar">false</item>

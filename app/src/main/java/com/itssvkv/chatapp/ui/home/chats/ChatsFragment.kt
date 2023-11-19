@@ -19,6 +19,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class ChatsFragment : Fragment() {
@@ -27,15 +28,17 @@ class ChatsFragment : Fragment() {
     private var searchJob: Job? = null
     private val chatsViewModel by viewModels<ChatsViewModel>()
     private lateinit var baseChatsAdapter: BaseChatsAdapter
-    private var currentUserId: String = ""
+
+    @Inject
+    lateinit var bundle: Bundle
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentChatsBinding.inflate(inflater, container, false)
-        currentUserId = (activity as MainActivity).currentUserId
-        baseChatsAdapter = BaseChatsAdapter(currentUserId = currentUserId)
+        baseChatsAdapter =
+            BaseChatsAdapter(currentUserId = (activity as MainActivity).currentUserId)
         binding?.searchResultRecycler?.adapter = baseChatsAdapter
         binding?.animationView?.visibility = View.GONE
         sendSearchQuery()
@@ -45,8 +48,10 @@ class ChatsFragment : Fragment() {
     }
 
     private fun openRootChat() {
-        baseChatsAdapter.onUserClickListener = {
-            parentFragment?.parentFragment?.findNavController()?.navigate(R.id.homeFragmentToRoomChatFragment)
+        baseChatsAdapter.onUserClickListener = { userInfo ->
+            bundle.putSerializable("userInfo", userInfo)
+            parentFragment?.parentFragment?.findNavController()
+                ?.navigate(R.id.homeFragmentToRoomChatFragment)
         }
     }
 
@@ -57,7 +62,7 @@ class ChatsFragment : Fragment() {
         }
         binding?.searchEt?.watchSearch(
             action = { searchInput ->
-                setupBaseChatsAdapter("+$searchInput")
+                setupBaseChatsAdapter(searchInput)
                 binding?.animationView?.visibility = View.GONE
                 binding?.chatsRecycler?.visibility = View.GONE
                 binding?.searchResultRecycler?.visibility = View.VISIBLE
@@ -74,6 +79,11 @@ class ChatsFragment : Fragment() {
             },
             duration = 1000
         )
+    }
+
+    override fun onResume() {
+        super.onResume()
+        binding?.animationView?.visibility = View.GONE
     }
 
     private fun setupBaseChatsAdapter(searchText: String) {

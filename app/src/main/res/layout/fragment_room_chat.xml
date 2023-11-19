@@ -35,9 +35,11 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@id/backIv"
             app:layout_constraintTop_toTopOf="parent"
+            app:shapeAppearanceOverlay="@style/userProfileImg"
             tools:src="@drawable/app_icon" />
 
         <TextView
+            android:id="@+id/usernameTv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
@@ -50,7 +52,7 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <View
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/view"
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -59,7 +61,21 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:padding="15dp">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/chatMessageRecycler"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="80dp"
+            app:reverseLayout="true"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/searchView"
@@ -76,18 +92,17 @@
         app:layout_constraintStart_toStartOf="parent">
 
         <EditText
-            android:id="@+id/searchEt"
+            android:id="@+id/sendMessageEt"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="15dp"
             android:layout_marginEnd="5dp"
             android:background="@android:color/transparent"
             android:hint="@string/enter_your_message_here"
-            android:inputType="text"
             android:textColor="@color/dots"
             android:textCursorDrawable="@null"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/deleteIcon"
+            app:layout_constraintEnd_toStartOf="@id/viewSendMessage"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -95,13 +110,15 @@
             android:id="@+id/viewSendMessage"
             android:layout_width="40dp"
             android:layout_height="40dp"
+            android:layout_marginStart="5dp"
             android:background="@drawable/send_message_view"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/sendMessageEt"
             app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
-            android:id="@+id/deleteIcon"
+            android:id="@+id/sendMessageIcon"
             android:layout_width="25dp"
             android:layout_height="25dp"
             android:src="@drawable/send_message"

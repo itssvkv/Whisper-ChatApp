@@ -1,0 +1,1 @@
+package com.itssvkv.chatapp.modelsimport com.google.firebase.Timestampdata class ChatRoom(    val chatRoomId: String = "",    val userIds: List<String>? = null,    var lastMessageTimestamp: Timestamp? = null,    var lastMessageSenderId: String = "")
