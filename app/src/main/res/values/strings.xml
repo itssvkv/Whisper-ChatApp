@@ -40,4 +40,7 @@
     <string name="status">Status</string>
     <string name="create">Create</string>
     <string name="helloMessage">Hello: %1$s</string>
+    <string name="chats">Chats</string>
+    <string name="settings">Settings</string>
+    <string name="enter_your_message_here">Enter your message here</string>
 </resources>

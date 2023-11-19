@@ -59,7 +59,8 @@ dependencies {
     implementation("com.google.firebase:firebase-analytics:21.5.0")
     implementation("com.google.firebase:firebase-firestore:24.9.1")
     implementation(platform("com.google.firebase:firebase-bom:32.5.0"))
-    implementation("com.google.firebase:firebase-auth:22.2.0")
+    implementation("com.google.firebase:firebase-auth:22.3.0")
+    implementation("com.firebaseui:firebase-ui-firestore:8.0.2")
 
     //Coroutines
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3")
@@ -94,4 +95,8 @@ dependencies {
     implementation("androidx.viewpager2:viewpager2:1.0.0")
     //dotIndicator
     implementation("com.tbuonomo:dotsindicator:5.0")
+
+    //lottieAnimation
+    val lottieVersion = "3.4.4"
+    implementation ("com.airbnb.android:lottie:$lottieVersion")
 }

@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.itssvkv.chatapp.R
 import com.itssvkv.chatapp.databinding.FragmentSendOtpBinding
+import com.itssvkv.chatapp.ui.MainActivity
 import com.itssvkv.chatapp.utils.Common.TAG
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
@@ -33,6 +34,7 @@ class SendOtpFragment : Fragment() {
             val codeCountry = binding?.countryNumber?.text?.toString()
             val phone = binding?.numberEt?.text?.toString()
             bundle.putString("phone", "$codeCountry$phone")
+            (activity as MainActivity).phoneNumber = codeCountry + phone
             Log.d(TAG, "sendOtp: $codeCountry$phone")
             this@SendOtpFragment.findNavController().navigate(R.id.sendFragmentToVerifyOtpFragment)
         }
