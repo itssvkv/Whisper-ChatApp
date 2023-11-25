@@ -1,1 +1,1 @@
-package com.itssvkv.chatapp.modelsdata class ChatMessage(    val message: String = "",    val senderId: String = "",    val timestamp: Long = 0)
+package com.itssvkv.chatapp.modelsimport com.google.firebase.Timestampdata class ChatMessage(    val message: String = "",    val senderId: String = "",    val timestamp: Timestamp? = null,    val id: String = "")

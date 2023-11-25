@@ -119,7 +119,7 @@ class RoomChatFragment : Fragment() {
     }
 
     private fun setDataForUser() {
-        otherUser = userInfo?.userId!!
+        otherUser = userInfo?.id!!
         Glide.with(binding.profileIV.context)
             .load(userInfo?.profilePhoto).into(binding.profileIV)
         binding.usernameTv.text = userInfo?.name
