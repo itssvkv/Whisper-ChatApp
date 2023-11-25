@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.RecyclerView.AdapterDataObserver
 import com.bumptech.glide.Glide
 import com.itssvkv.chatapp.databinding.FragmentRoomChatBinding
 import com.itssvkv.chatapp.models.ChatMessage
@@ -23,7 +24,8 @@ import javax.inject.Inject
 class RoomChatFragment : Fragment() {
     private var _binding: FragmentRoomChatBinding? = null
     private val roomChatViewModel by viewModels<RoomChatViewModel>()
-    private lateinit var chatMessageAdapter: ChatMessageAdapter
+
+    @Inject lateinit var chatMessageAdapter: ChatMessageAdapter
     private val binding get() = _binding!!
 
     private var userInfo: UserDataInfo? = null
@@ -44,10 +46,10 @@ class RoomChatFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         _binding = FragmentRoomChatBinding.inflate(inflater, container, false)
-        chatMessageAdapter =
-            ChatMessageAdapter(currentUserId = (activity as MainActivity).currentUserId)
-        binding.chatMessageRecycler.adapter = chatMessageAdapter
+        currentUserId = (activity as MainActivity).currentUserId
+        Log.d(TAG, "onCreateView: $currentUserId")
         Log.d(TAG, "onCreateView:${(activity as MainActivity).currentUserId}")
+        binding.chatMessageRecycler.adapter = chatMessageAdapter
         return _binding?.root
 
     }
@@ -58,7 +60,7 @@ class RoomChatFragment : Fragment() {
     }
 
     private fun init() {
-        currentUserId = (activity as MainActivity).currentUserId
+        Log.d(TAG, "userid: $currentUserId")
         setDataForUser()
         initClicks()
         lifecycleScope.launch {
@@ -66,8 +68,10 @@ class RoomChatFragment : Fragment() {
                 .getChatRoomId(secondUserId = otherUser)
             Log.d(TAG, "init: $chatRoomId")
             getOrCreateChatRoom(chatRoomId = chatRoomId)
+            initChatMessageAdapter()
         }
-        initChatMessageAdapter()
+
+
     }
 
     private fun initClicks() {
@@ -87,20 +91,26 @@ class RoomChatFragment : Fragment() {
                 roomChatViewModel.clearEditText = {
                     binding.sendMessageEt.setText("")
                 }
-                initChatMessageAdapter()
             }
         }
     }
 
+
     private fun initChatMessageAdapter() {
         lifecycleScope.launch {
             roomChatViewModel.getAllMessageOfTwoUsers(chatRoomId = chatRoomId)
-                .addOnSuccessListener { query ->
-                    chatMessageAdapter.submitList(query.toObjects(ChatMessage::class.java))
+        }
+        roomChatViewModel.query.observe(viewLifecycleOwner) {
+            chatMessageAdapter.submitList(it.toObjects(ChatMessage::class.java))
+            chatMessageAdapter.registerAdapterDataObserver(object : AdapterDataObserver() {
+                override fun onItemRangeInserted(positionStart: Int, itemCount: Int) {
+                    super.onItemRangeInserted(positionStart, itemCount)
+                    binding.chatMessageRecycler.smoothScrollToPosition(0)
                 }
+            })
+            Log.d(TAG, "initChatMessageAdapter: ${it.toObjects(ChatMessage::class.java)}")
         }
     }
-
 
     private fun getOrCreateChatRoom(chatRoomId: String) {
         lifecycleScope.launch {
@@ -113,7 +123,6 @@ class RoomChatFragment : Fragment() {
         Glide.with(binding.profileIV.context)
             .load(userInfo?.profilePhoto).into(binding.profileIV)
         binding.usernameTv.text = userInfo?.name
-
-
     }
+
 }

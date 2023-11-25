@@ -13,7 +13,6 @@ import androidx.navigation.fragment.findNavController
 import com.itssvkv.chatapp.R
 import com.itssvkv.chatapp.databinding.FragmentChatsBinding
 import com.itssvkv.chatapp.models.UserDataInfo
-import com.itssvkv.chatapp.ui.MainActivity
 import com.itssvkv.chatapp.ui.home.adapters.BaseChatsAdapter
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Job
@@ -23,11 +22,11 @@ import javax.inject.Inject
 
 @AndroidEntryPoint
 class ChatsFragment : Fragment() {
-
     private var binding: FragmentChatsBinding? = null
     private var searchJob: Job? = null
     private val chatsViewModel by viewModels<ChatsViewModel>()
-    private lateinit var baseChatsAdapter: BaseChatsAdapter
+    @Inject
+    lateinit var baseChatsAdapter: BaseChatsAdapter
 
     @Inject
     lateinit var bundle: Bundle
@@ -37,8 +36,6 @@ class ChatsFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentChatsBinding.inflate(inflater, container, false)
-        baseChatsAdapter =
-            BaseChatsAdapter(currentUserId = (activity as MainActivity).currentUserId)
         binding?.searchResultRecycler?.adapter = baseChatsAdapter
         binding?.animationView?.visibility = View.GONE
         sendSearchQuery()
