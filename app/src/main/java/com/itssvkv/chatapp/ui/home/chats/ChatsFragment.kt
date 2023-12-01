@@ -12,8 +12,10 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.itssvkv.chatapp.R
 import com.itssvkv.chatapp.databinding.FragmentChatsBinding
+import com.itssvkv.chatapp.models.ChatRoom
 import com.itssvkv.chatapp.models.UserDataInfo
 import com.itssvkv.chatapp.ui.home.adapters.BaseChatsAdapter
+import com.itssvkv.chatapp.ui.home.adapters.RecentChatAdapter
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
@@ -25,28 +27,52 @@ class ChatsFragment : Fragment() {
     private var binding: FragmentChatsBinding? = null
     private var searchJob: Job? = null
     private val chatsViewModel by viewModels<ChatsViewModel>()
+
     @Inject
     lateinit var baseChatsAdapter: BaseChatsAdapter
 
     @Inject
-    lateinit var bundle: Bundle
+    lateinit var recentChatAdapter: RecentChatAdapter
 
+    @Inject
+    lateinit var bundle: Bundle
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentChatsBinding.inflate(inflater, container, false)
+        binding?.chatsRecycler?.adapter = recentChatAdapter
         binding?.searchResultRecycler?.adapter = baseChatsAdapter
         binding?.animationView?.visibility = View.GONE
         sendSearchQuery()
         openRootChat()
+        setupRecentChatAdapter()
         // Inflate the layout for this fragment
         return binding?.root
+    }
+
+
+    private fun setupRecentChatAdapter() {
+        lifecycleScope.launch {
+            chatsViewModel.getAllChatRooms()
+        }
+        chatsViewModel.query.observe(viewLifecycleOwner) { query ->
+            if (query != null) {
+                recentChatAdapter.submitList(query.toObjects(ChatRoom::class.java))
+            }
+
+        }
+
     }
 
     private fun openRootChat() {
         baseChatsAdapter.onUserClickListener = { userInfo ->
             bundle.putSerializable("userInfo", userInfo)
+            parentFragment?.parentFragment?.findNavController()
+                ?.navigate(R.id.homeFragmentToRoomChatFragment)
+        }
+        recentChatAdapter.onChatClickedListener = {userDataInfo ->
+            bundle.putSerializable("userInfo", userDataInfo)
             parentFragment?.parentFragment?.findNavController()
                 ?.navigate(R.id.homeFragmentToRoomChatFragment)
         }
