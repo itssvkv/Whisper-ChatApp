@@ -1,6 +1,7 @@
 package com.itssvkv.chatapp.ui.home.chats
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -16,6 +17,7 @@ import com.itssvkv.chatapp.models.ChatRoom
 import com.itssvkv.chatapp.models.UserDataInfo
 import com.itssvkv.chatapp.ui.home.adapters.BaseChatsAdapter
 import com.itssvkv.chatapp.ui.home.adapters.RecentChatAdapter
+import com.itssvkv.chatapp.utils.Common.TAG
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
@@ -51,18 +53,13 @@ class ChatsFragment : Fragment() {
         return binding?.root
     }
 
-
     private fun setupRecentChatAdapter() {
-        lifecycleScope.launch {
-            chatsViewModel.getAllChatRooms()
-        }
         chatsViewModel.query.observe(viewLifecycleOwner) { query ->
-            if (query != null) {
+            if (query !=null){
+                Log.d(TAG, "setupRecentChatAdapter: ${query.toObjects(ChatRoom::class.java)}")
                 recentChatAdapter.submitList(query.toObjects(ChatRoom::class.java))
             }
-
         }
-
     }
 
     private fun openRootChat() {
@@ -71,7 +68,7 @@ class ChatsFragment : Fragment() {
             parentFragment?.parentFragment?.findNavController()
                 ?.navigate(R.id.homeFragmentToRoomChatFragment)
         }
-        recentChatAdapter.onChatClickedListener = {userDataInfo ->
+        recentChatAdapter.onChatClickedListener = { userDataInfo ->
             bundle.putSerializable("userInfo", userDataInfo)
             parentFragment?.parentFragment?.findNavController()
                 ?.navigate(R.id.homeFragmentToRoomChatFragment)
