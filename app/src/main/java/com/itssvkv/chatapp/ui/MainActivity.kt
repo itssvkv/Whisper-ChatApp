@@ -3,6 +3,7 @@ package com.itssvkv.chatapp.ui
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.itssvkv.chatapp.databinding.ActivityMainBinding
+import com.itssvkv.chatapp.models.UserDataInfo
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

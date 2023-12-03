@@ -10,7 +10,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.itssvkv.chatapp.R
-import com.itssvkv.chatapp.bottomsheets.CreateUserBottomSheet
+import com.itssvkv.chatapp.bottomsheets.createuser.CreateUserBottomSheet
 import com.itssvkv.chatapp.databinding.FragmentVerifyOtpBinding
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch

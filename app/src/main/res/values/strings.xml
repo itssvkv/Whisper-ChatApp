@@ -43,4 +43,13 @@
     <string name="chats">Chats</string>
     <string name="settings">Settings</string>
     <string name="enter_your_message_here">Enter your message here</string>
+    <string name="you">You</string>
+    <string name="profile">Profile</string>
+    <string name="Profile_name">Name</string>
+    <string name="this_name_will_be_visible_to_your_friends">This name will be visible to your friends</string>
+    <string name="phone">Phone</string>
+    <string name="enter_your_name">Enter your name</string>
+    <string name="save">save</string>
+    <string name="cancel">cancel</string>
+    <string name="add_about">Add about</string>
 </resources>

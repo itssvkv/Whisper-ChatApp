@@ -1,4 +1,4 @@
-<resources xmlns:tools="http://schemas.android.com/tools">
+<resources>
     <!-- Base application theme. -->
     <style name="Base.Theme.ChatApp" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your light theme here. -->
@@ -17,9 +17,20 @@
         <item name="cornerFamily">rounded</item>
         <item name="cornerSize">35dp</item>
     </style>
+
     <style name="userProfileImg">
         <item name="cornerFamily">rounded</item>
         <item name="cornerSize">20dp</item>
+    </style>
+
+    <style name="updateUserProfileImg">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">90dp</item>
+    </style>
+
+    <style name="settingsUserProfileImg">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">60dp</item>
     </style>
 
     <style name="AppTheme.NoActionBar" parent="Theme.AppCompat.Light.DarkActionBar">
@@ -32,15 +43,29 @@
         <item name="bottomSheetDialogTheme">@style/AppBottomSheetDialogTheme</item>
     </style>
 
-    <style name="AppBottomSheetDialogTheme"
-        parent="Theme.Design.Light.BottomSheetDialog">
+    <style name="AppBottomSheetDialogTheme" parent="Theme.Design.Light.BottomSheetDialog">
         <item name="bottomSheetStyle">@style/AppModalStyle</item>
     </style>
 
 
-
-    <style name="AppModalStyle"
-        parent="Widget.Design.BottomSheet.Modal">
+    <style name="AppModalStyle" parent="Widget.Design.BottomSheet.Modal">
         <item name="android:background">@drawable/dialog_bg</item>
+    </style>
+
+
+    <style name="updateNameSheetDialog" parent="Theme.Design.Light.BottomSheetDialog">
+        <item name="bottomSheetStyle">@style/updateNameStyle</item>
+    </style>
+
+
+    <style name="updateNameStyle" parent="Widget.Design.BottomSheet.Modal">
+        <item name="android:background">@drawable/update_info_dialog</item>
+    </style>
+
+    <style name="DialogStyle" parent="Theme.Design.Light.BottomSheetDialog">
+        <item name="android:windowIsFloating">false</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:windowSoftInputMode">adjustResize</item>
+        <item name="bottomSheetStyle">@style/updateNameStyle</item>
     </style>
 </resources>

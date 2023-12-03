@@ -4,6 +4,6 @@
         android:title="@string/status" />
     <item android:id="@+id/chatsFragment"
         android:title="@string/chats"/>
-    <item android:id="@+id/settings"
+    <item android:id="@+id/settingsFragment"
         android:title="@string/settings"/>
 </menu>

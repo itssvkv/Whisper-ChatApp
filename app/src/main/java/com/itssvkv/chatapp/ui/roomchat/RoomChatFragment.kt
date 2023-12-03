@@ -76,7 +76,7 @@ class RoomChatFragment : Fragment() {
 
     private fun initClicks() {
         binding.backIv.setOnClickListener {
-            activity?.onBackPressed()
+            activity?.onBackPressedDispatcher?.onBackPressed()
         }
 
         binding.sendMessageIcon.setOnClickListener {
