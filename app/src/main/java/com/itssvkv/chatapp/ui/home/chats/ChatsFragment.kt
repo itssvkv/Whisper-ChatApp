@@ -104,6 +104,7 @@ class ChatsFragment : Fragment() {
     override fun onResume() {
         super.onResume()
         binding?.animationView?.visibility = View.GONE
+        chatsViewModel.updateChatRooms()
     }
 
     private fun setupBaseChatsAdapter(searchText: String) {

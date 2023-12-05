@@ -119,6 +119,7 @@ class RoomChatFragment : Fragment() {
     }
 
     private fun setDataForUser() {
+        Log.d(TAG, "setDataForUser: $userInfo")
         otherUser = userInfo?.id!!
         Glide.with(binding.profileIV.context)
             .load(userInfo?.profilePhoto).into(binding.profileIV)
