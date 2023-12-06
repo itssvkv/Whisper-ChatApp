@@ -1,1 +1,1 @@
-package com.itssvkv.chatapp.data.local.repositoryimport android.content.Contextinterface SharedPrefRepository {    suspend fun saveToPref(context: Context, key: String, value: Any)    suspend fun getFromPref(context: Context, key: String, defValue: Any): Any}
+package com.itssvkv.chatapp.data.local.repositoryimport android.content.Contextinterface SharedPrefRepository {    suspend fun saveToPref(context: Context, key: String, value: Any)    suspend fun getFromPref(context: Context, key: String, defValue: Any?): Any?}

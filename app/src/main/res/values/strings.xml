@@ -38,6 +38,7 @@
     <string name="name">name…</string>
     <string name="about_you">About You</string>
     <string name="status">Status</string>
+    <string name="posts">Posts</string>
     <string name="create">Create</string>
     <string name="helloMessage">Hello: %1$s</string>
     <string name="chats">Chats</string>
@@ -52,4 +53,8 @@
     <string name="save">save</string>
     <string name="cancel">cancel</string>
     <string name="add_about">Add about</string>
+    <string name="what_s_on_your_mind">What\'s on your mind?</string>
+    <string name="create_post">Create post</string>
+    <string name="post">POST</string>
+    <string name="photo">Photo</string>
 </resources>

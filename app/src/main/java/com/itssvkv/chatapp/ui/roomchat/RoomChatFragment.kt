@@ -101,14 +101,14 @@ class RoomChatFragment : Fragment() {
             roomChatViewModel.getAllMessageOfTwoUsers(chatRoomId = chatRoomId)
         }
         roomChatViewModel.query.observe(viewLifecycleOwner) {
-            chatMessageAdapter.submitList(it.toObjects(ChatMessage::class.java))
+            chatMessageAdapter.submitList(it?.toObjects(ChatMessage::class.java))
             chatMessageAdapter.registerAdapterDataObserver(object : AdapterDataObserver() {
                 override fun onItemRangeInserted(positionStart: Int, itemCount: Int) {
                     super.onItemRangeInserted(positionStart, itemCount)
                     binding.chatMessageRecycler.smoothScrollToPosition(0)
                 }
             })
-            Log.d(TAG, "initChatMessageAdapter: ${it.toObjects(ChatMessage::class.java)}")
+            Log.d(TAG, "initChatMessageAdapter: ${it?.toObjects(ChatMessage::class.java)}")
         }
     }
 

@@ -1,1 +1,1 @@
-package com.itssvkv.chatapp.utils.sharedprefobject SharedPrefCommon {    const val IS_FIRST_TIME = "isFirstTime"    const val REMEMBER_ME_CHECKED = "rememberMe"    const val IS_USER = "isUser"    const val CURRENT_USER_ID = "currentUserId"}
+package com.itssvkv.chatapp.utils.sharedprefobject SharedPrefCommon {    const val IS_FIRST_TIME = "isFirstTime"    const val REMEMBER_ME_CHECKED = "rememberMe"    const val IS_USER = "isUser"    const val CURRENT_USER_ID = "currentUserId"    const val CURRENT_USER_INFO = "currentUserInfo"}

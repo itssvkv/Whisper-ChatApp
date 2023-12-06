@@ -100,4 +100,6 @@ dependencies {
     //lottieAnimation
     val lottieVersion = "3.4.4"
     implementation ("com.airbnb.android:lottie:$lottieVersion")
+    //Gson
+    implementation ("com.google.code.gson:gson:2.10.1")
 }
