@@ -24,7 +24,6 @@ class CreatePostFragment : Fragment() {
     private val createPostViewModel by viewModels<CreatePostViewModel>()
     private val binding get() = _binding!!
     private var imgResult: Uri? = null
-    private var downloadImage: Uri? = null
     private var resultLauncher: ActivityResultLauncher<Intent>? = null
     private val imgIntent by lazy { Intent() }
     override fun onCreateView(
