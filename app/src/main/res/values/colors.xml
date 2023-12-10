@@ -8,4 +8,8 @@
     <color name="onBoardingBgColor">#010C1E</color>
     <color name="onBoardingBtnColor">#4a6d88</color>
     <color name="editText">#E8E6E6</color>
+    <color name="primary">#006175</color>
+    <color name="onPrimary">#B3000000</color>
+    <color name="onPrimaryContainer">#80000000</color>
+
 </resources>

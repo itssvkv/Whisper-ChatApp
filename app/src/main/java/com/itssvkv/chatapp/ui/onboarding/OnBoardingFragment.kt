@@ -30,6 +30,7 @@ class OnBoardingFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentOnBoardingBinding.inflate(inflater, container, false)
+        binding?.onBoardingContinueTv?.visibility = View.INVISIBLE
         init()
         return binding?.root
     }
@@ -46,7 +47,6 @@ class OnBoardingFragment : Fragment() {
         binding?.let {
             it.onBoardingPager.adapter = adapter
         }
-        binding?.donIndicator?.attachTo(binding!!.onBoardingPager)
     }
 
     private fun setNextBtnVisibility() {
@@ -60,20 +60,15 @@ class OnBoardingFragment : Fragment() {
                 super.onPageScrolled(position, positionOffset, positionOffsetPixels)
                 if (position == 0 || position == 1) {
                     Log.d(TAG, "onPageScrolled: $position")
-                    binding?.onBoardingNextBtn?.animate().apply {
-                        this?.alpha(1f)
-                        this?.scaleX(1f)
-                        this?.duration = 500L
+                    binding?.onBoardingNextTv?.visibility = View.VISIBLE
+                    binding?.onBoardingSkipTv?.visibility = View.VISIBLE
+                    binding?.onBoardingContinueTv?.visibility = View.INVISIBLE
 
-                    }
                 } else {
                     Log.d(TAG, "onPageScrolled: $position")
-                    binding?.onBoardingNextBtn?.animate().apply {
-                        this?.alpha(0f)
-                        this?.scaleX(0f)
-                        this?.duration = 500L
-
-                    }
+                    binding?.onBoardingNextTv?.visibility = View.INVISIBLE
+                    binding?.onBoardingSkipTv?.visibility = View.INVISIBLE
+                    binding?.onBoardingContinueTv?.visibility = View.VISIBLE
 
                 }
             }
@@ -81,7 +76,7 @@ class OnBoardingFragment : Fragment() {
     }
 
     private fun initNextBtn() {
-        binding?.onBoardingNextBtn?.setOnClickListener {
+        binding?.onBoardingNextTv?.setOnClickListener {
             when (binding?.onBoardingPager?.currentItem) {
                 0 -> {
                     binding?.onBoardingPager?.currentItem = 1
@@ -96,6 +91,13 @@ class OnBoardingFragment : Fragment() {
 
     private fun initSkipTV() {
         binding?.onBoardingSkipTv?.setOnClickListener {
+            this@OnBoardingFragment.findNavController()
+                .navigate(R.id.onBoardingFragmentToAuthFragment)
+            lifecycleScope.launch {
+                viewModel.saveToPref(requireContext(), IS_FIRST_TIME, false)
+            }
+        }
+        binding?.onBoardingContinueTv?.setOnClickListener {
             this@OnBoardingFragment.findNavController()
                 .navigate(R.id.onBoardingFragmentToAuthFragment)
             lifecycleScope.launch {

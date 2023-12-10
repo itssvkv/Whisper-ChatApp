@@ -22,16 +22,15 @@
         android:id="@+id/verifyNumberBoldTv"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:fontFamily="@font/poppins_semi_bold"
         android:gravity="center"
         android:paddingHorizontal="7dp"
-        android:textStyle="bold"
         android:text="@string/verify_number_bold_tv"
-        android:textColor="@color/onBoardingBgColor"
+        android:textColor="@color/black"
         android:textSize="25sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/verifyNumberIv" />
-
 
 
     <TextView
@@ -39,11 +38,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="25dp"
+        android:fontFamily="@font/poppins_medium"
         android:gravity="center"
-        android:paddingHorizontal="7dp"
+        android:paddingHorizontal="6dp"
         android:text="@string/verify_number_tv"
-        android:textColor="@color/appNameColor"
-        android:textSize="16sp"
+        android:textColor="@color/onPrimary"
+        android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/verifyNumberBoldTv" />
@@ -65,7 +65,7 @@
             android:layout_width="80dp"
             android:layout_height="wrap_content"
             android:layout_marginEnd="5dp"
-            android:background="@drawable/verify_number_et"
+            android:background="@drawable/primary_container"
             android:hint="@string/_1"
             android:inputType="text"
             android:padding="15dp"
@@ -78,12 +78,12 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:background="@drawable/verify_number_et"
+            android:background="@drawable/primary_container"
             android:hint="@string/number"
             android:inputType="number"
             android:padding="15dp"
-            android:textColorHint="@color/dots"
-            android:textColor="@color/dots" />
+            android:textColor="@color/dots"
+            android:textColorHint="@color/dots" />
     </LinearLayout>
 
     <androidx.appcompat.widget.AppCompatButton
@@ -92,11 +92,12 @@
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="5dp"
         android:layout_marginTop="25dp"
-        android:background="@drawable/sent_btn"
+        android:background="@drawable/primary_button"
         android:text="@string/send"
+        android:fontFamily="@font/poppins_semi_bold"
         android:textAllCaps="false"
         android:textColor="@color/white"
-        android:textSize="20sp"
+        android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/verifyNumberLayout" />

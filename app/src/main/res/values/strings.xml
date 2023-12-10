@@ -1,20 +1,18 @@
 <resources>
-    <string name="app_name">Whisper</string>
+    <string name="app_name">Momento</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="splash">splash</string>
     <string name="skip">Skip</string>
     <string name="next">Next</string>
     <string name="dots">- - - - -</string>
-    <string name="welcome_message">Welcome</string>
-    <string name="first_dis">"Welcome to Whisper! Connect and chat with ease.\nHello! Ready to start chatting? Let's get you set up!"
-    </string>
+    <string name="first_text">Connect with Friends \nand Family</string>
+    <string name="first_dis">Connecting with Family and Friends \nprovides a sense of belonging and \nsecurity</string>
 
-    <string name="key_features">Key Features</string>
-    <string name="second_dis">"Send and receive messages in real-time. \n
-        Chat with friends anytime, anywhere."</string>
-    <string name="call_to_action">Call to Action</string>
-    <string name="third_dis">"Tap Start to begin your first conversation.\n Hit Get Started and connect with friends!"</string>
+    <string name="second_text">Make new friends \nwith ease</string>
+    <string name="second_dis">Allowing you to make new Friends is \nour Number one priority.....</string>
+    <string name="third_text">Express yourself to \nthe world</string>
+    <string name="third_dis">Let your voice be heard on the internet \nthrough the OFOFO features on the App \nwithout restrictions</string>
     <string name="note">Note: Our authentication is done via a browser because the api does not provide it.</string>
     <string name="sign_in">Sign In</string>
     <string name="line">________</string>
@@ -59,4 +57,5 @@
     <string name="photo">Photo</string>
     <string name="like">Like</string>
     <string name="share">Share</string>
+    <string name="continue_tv">Continue</string>
 </resources>

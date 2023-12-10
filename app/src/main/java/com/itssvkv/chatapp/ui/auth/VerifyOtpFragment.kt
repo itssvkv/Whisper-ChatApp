@@ -52,11 +52,13 @@ class VerifyOtpFragment : Fragment() {
 
     private fun setInProgress() {
         verifyOtpViewModel.isProgressTrue = {
+            binding?.verifyBtn?.visibility = View.GONE
             binding?.progressBar?.visibility = View.VISIBLE
 
         }
         verifyOtpViewModel.isProgressFalse = {
             binding?.progressBar?.visibility = View.GONE
+            binding?.verifyBtn?.visibility = View.VISIBLE
         }
     }
 

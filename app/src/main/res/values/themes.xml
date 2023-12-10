@@ -68,4 +68,9 @@
         <item name="android:windowSoftInputMode">adjustResize</item>
         <item name="bottomSheetStyle">@style/updateNameStyle</item>
     </style>
+
+    <style name="WhiteProgressBar" parent="@android:style/Widget.ProgressBar.Horizontal">
+        <item name="android:progressDrawable">@drawable/white_progress_bar</item>
+    </style>
+
 </resources>
