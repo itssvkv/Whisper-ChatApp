@@ -11,5 +11,7 @@
     <color name="primary">#006175</color>
     <color name="onPrimary">#B3000000</color>
     <color name="onPrimaryContainer">#80000000</color>
+    <color name="postsPrimaryContainer">#33C4C4C4</color>
+
 
 </resources>

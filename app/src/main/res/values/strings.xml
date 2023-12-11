@@ -58,4 +58,8 @@
     <string name="like">Like</string>
     <string name="share">Share</string>
     <string name="continue_tv">Continue</string>
+    <string name="personal_information">Personal Information</string>
+    <string name="full_name">Full name</string>
+    <string name="username">Username</string>
+    <string name="postsLikesCount">Liked by Blazinshado and 100+ others</string>
 </resources>

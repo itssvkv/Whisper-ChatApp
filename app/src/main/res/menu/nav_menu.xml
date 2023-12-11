@@ -1,9 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:id="@+id/postsFragment"
-        android:title="@string/posts" />
-    <item android:id="@+id/chatsFragment"
-        android:title="@string/chats"/>
-    <item android:id="@+id/settingsFragment"
-        android:title="@string/settings"/>
+    <item
+        android:id="@+id/postsFragment"
+        android:icon="@drawable/home"
+        android:title="" />
+    <item
+        android:id="@+id/search"
+        android:icon="@drawable/search_icon"
+        android:title="" />
+    <item
+        android:id="@+id/posts"
+        android:icon="@drawable/post"
+        android:title="" />
+    <item
+        android:id="@+id/chatsFragment"
+        android:icon="@drawable/chat"
+        android:title="" />
+    <item
+        android:id="@+id/settingsFragment"
+        android:icon="@drawable/profile"
+        android:title="" />
 </menu>

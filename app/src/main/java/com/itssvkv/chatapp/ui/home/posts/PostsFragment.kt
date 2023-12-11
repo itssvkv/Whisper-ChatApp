@@ -45,7 +45,6 @@ class PostsFragment : Fragment() {
 
     private fun getCurrentUserInfoFormSharedPref() {
         postsViewModel.currentUserDataInfo.observe(viewLifecycleOwner) {
-            Glide.with(requireContext()).load(it.profilePhoto).into(binding.currentUserIv)
         }
     }
 

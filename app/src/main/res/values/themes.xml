@@ -18,9 +18,16 @@
         <item name="cornerSize">35dp</item>
     </style>
 
+    <style name="postsRoundedImg">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">10dp</item>
+        <item name="strokeWidth">0.5dp</item>
+        <item name="strokeColor">#000000</item>
+    </style>
+
     <style name="userProfileImg">
         <item name="cornerFamily">rounded</item>
-        <item name="cornerSize">20dp</item>
+        <item name="cornerSize">22.5dp</item>
     </style>
 
     <style name="updateUserProfileImg">

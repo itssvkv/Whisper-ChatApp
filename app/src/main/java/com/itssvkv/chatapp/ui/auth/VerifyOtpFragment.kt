@@ -20,7 +20,6 @@ import javax.inject.Inject
 class VerifyOtpFragment : Fragment() {
     private var binding: FragmentVerifyOtpBinding? = null
     private val verifyOtpViewModel by viewModels<VerifyOtpViewModel>()
-    private val createUserBottomSheet by lazy { CreateUserBottomSheet() }
 
     @Inject
     lateinit var bundle: Bundle
@@ -67,20 +66,22 @@ class VerifyOtpFragment : Fragment() {
         binding?.verifyBtn?.setOnClickListener {
             binding?.progressBar?.visibility = View.VISIBLE
             val code = binding?.numberEt?.text.toString()
-            verifyOtpViewModel.verifyOtp(code)
+            verifyOtpViewModel.verifyOtp(code, requireContext())
+            verifyOtpViewModel.isUserExist.observe(viewLifecycleOwner) {
+                when (it) {
+                    true -> this@VerifyOtpFragment.findNavController()
+                        .navigate(R.id.verifyOtpFragmentToHomeFragment)
+
+                    false -> this@VerifyOtpFragment.findNavController()
+                        .navigate(R.id.verifyOtpFragmentToCreateUserFragment)
+
+
+                }
+            }
         }
         verifyOtpViewModel.showToast = {
             Toast.makeText(requireContext(), it, Toast.LENGTH_SHORT).show()
         }
-
-        verifyOtpViewModel.createUser = {
-            createUserBottomSheet.show(requireActivity().supportFragmentManager, null)
-        }
-        createUserBottomSheet.goToNextFragment = {
-            this@VerifyOtpFragment.findNavController()
-                .navigate(R.id.verifyOtpFragmentToHomeFragment)
-        }
-
     }
 }
 
