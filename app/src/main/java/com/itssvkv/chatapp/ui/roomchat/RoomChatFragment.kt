@@ -37,7 +37,7 @@ class RoomChatFragment : Fragment() {
     lateinit var bundle: Bundle
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        userInfo = bundle.getSerializable("userInfo") as UserDataInfo?
+        userInfo = bundle.getSerializable("otherUserProfile") as UserDataInfo?
     }
 
     override fun onCreateView(

@@ -1,4 +1,4 @@
-package com.itssvkv.chatapp.ui.createpost
+package com.itssvkv.chatapp.ui.home.createpost
 
 import android.app.Activity
 import android.content.Intent
@@ -39,7 +39,7 @@ class CreatePostFragment : Fragment() {
 
     private fun init() {
         getCurrentUserInfoFromSharedPref()
-        setCurrentUserInfo()
+//        setCurrentUserInfo()
         initClicks()
         selectImage()
 
@@ -49,23 +49,23 @@ class CreatePostFragment : Fragment() {
         createPostViewModel.getCurrentUserInfoFormSharedPref(requireContext())
     }
 
-    private fun setCurrentUserInfo() {
-        createPostViewModel.currentUserDataInfoLiveData.observe(viewLifecycleOwner) {
-            binding.currentUserName.text = it.name
-            Glide.with(binding.currentUserIv.context)
-                .load(it.profilePhoto)
-                .into(binding.currentUserIv)
-        }
-    }
+//    private fun setCurrentUserInfo() {
+//        createPostViewModel.currentUserDataInfoLiveData.observe(viewLifecycleOwner) {
+//            binding.currentUserName.text = it.name
+//            Glide.with(binding.currentUserIv.context)
+//                .load(it.profilePhoto)
+//                .into(binding.currentUserIv)
+//        }
+//    }
 
     private fun initClicks() {
         binding.backIv.setOnClickListener {
             activity?.onBackPressedDispatcher?.onBackPressed()
         }
-        binding.choosePhotoIv.setOnClickListener {
+        binding.chooseImageIv.setOnClickListener {
             resultLauncher?.launch(imgIntent)
         }
-        binding.postTv.setOnClickListener {
+        binding.uploadBottom.setOnClickListener {
             createPostOnFirebase()
         }
     }
@@ -80,7 +80,7 @@ class CreatePostFragment : Fragment() {
                 if (it.resultCode == Activity.RESULT_OK) {
                     imgResult = it?.data?.data
                     imgResult?.let { imgUri ->
-                        binding.postPhoto.setImageURI(imgUri)
+                        binding.choosesImageIv.setImageURI(imgUri)
                         createPostViewModel.uploadImageToFirebase(imgUri)
                     }
 
@@ -91,7 +91,7 @@ class CreatePostFragment : Fragment() {
     private fun createPostOnFirebase() {
 
         createPostViewModel.setPostDataToFirebase(
-            caption = binding.createPostEt.text.toString()
+            caption = binding.addCaptionEt.text.toString()
         )
 
         createPostViewModel.closeCreatePostFragment = {

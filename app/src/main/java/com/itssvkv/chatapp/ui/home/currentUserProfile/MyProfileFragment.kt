@@ -1,4 +1,4 @@
-package com.itssvkv.chatapp.ui.home.setting
+package com.itssvkv.chatapp.ui.home.currentUserProfile
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -17,10 +17,10 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class SettingsFragment : Fragment() {
+class MyProfileFragment : Fragment() {
 
     private var _binding: FragmentSettingsBinding? = null
-    private val settingsViewModel by viewModels<SettingsViewModel>()
+    private val myProfileViewModel by viewModels<MyProfileViewModel>()
     private var currentUserInfo: UserDataInfo? = null
     val binding get() = _binding!!
 
@@ -45,18 +45,19 @@ class SettingsFragment : Fragment() {
 
     private fun getUserInfo() {
         lifecycleScope.launch {
-            settingsViewModel.getCurrentUserInfo()
+            myProfileViewModel.getCurrentUserFromSharedPref(requireContext())
         }
     }
 
     private fun setupUserInfo() {
-        settingsViewModel.currentUserInfoLiveData.observe(viewLifecycleOwner) { userInfo ->
+        myProfileViewModel.currentUserDataInfo.observe(viewLifecycleOwner) { userInfo ->
             currentUserInfo = userInfo
-            Glide.with(binding.profileIV.context)
+            Glide.with(binding.userPhotoIv.context)
                 .load(userInfo.profilePhoto)
-                .into(binding.profileIV)
+                .into(binding.userPhotoIv)
             binding.usernameTv.text = userInfo.name
-            binding.statusTv.text = userInfo.status
+            binding.userStatusTv.text = userInfo.status
+            binding.userUsernameTv.text = userInfo.username
 
         }
     }
@@ -65,7 +66,7 @@ class SettingsFragment : Fragment() {
         binding.backIv.setOnClickListener {
             activity?.onBackPressedDispatcher?.onBackPressed()
         }
-        binding.profileIV.setOnClickListener {
+        binding.editProfileBottom.setOnClickListener {
             bundle.putSerializable("currentUserInfo", currentUserInfo)
             parentFragment?.parentFragment?.findNavController()
                 ?.navigate(R.id.homeFragmentToUpdateFragment)

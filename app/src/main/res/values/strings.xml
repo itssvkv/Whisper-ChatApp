@@ -19,7 +19,7 @@
     <string name="don_t_have_an_account">Don\'t have an account?</string>
     <string name="sing_up">Sing Up</string>
     <string name="back">Back</string>
-    <string name="search">Search…</string>
+    <string name="search">Search</string>
     <string name="trending_tags">Trending tags</string>
     <string name="category">Category</string>
     <string name="verify_number_tv">Please Enter Your Number To Verify Your Account</string>
@@ -53,7 +53,7 @@
     <string name="add_about">Add about</string>
     <string name="what_s_on_your_mind">What\'s on your mind?</string>
     <string name="create_post">Create post</string>
-    <string name="post">POST</string>
+    <string name="post">Post</string>
     <string name="photo">Photo</string>
     <string name="like">Like</string>
     <string name="share">Share</string>
@@ -62,4 +62,11 @@
     <string name="full_name">Full name</string>
     <string name="username">Username</string>
     <string name="postsLikesCount">Liked by Blazinshado and 100+ others</string>
+    <string name="select_image">Select Image</string>
+    <string name="add_caption">Add caption</string>
+    <string name="upload">Upload</string>
+    <string name="num_posts">87\nPosts</string>
+    <string name="num_following">87\nFollowing</string>
+    <string name="edit_profile">Edit Profile</string>
+    <string name="my_profile">My Profile</string>
 </resources>

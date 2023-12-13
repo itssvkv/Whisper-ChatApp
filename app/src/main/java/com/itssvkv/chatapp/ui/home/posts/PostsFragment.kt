@@ -31,29 +31,29 @@ class PostsFragment : Fragment() {
     }
 
     private fun init() {
-        getCurrentUserInfo()
-        getCurrentUserInfoFormSharedPref()
-        initClicks()
+//        getCurrentUserInfo()
+//        getCurrentUserInfoFormSharedPref()
+//        initClicks()
         setupPostsRecycler()
         setDataToPostsAdapter()
 
     }
 
-    private fun getCurrentUserInfo() {
-        postsViewModel.getCurrentUserInfo(requireContext())
-    }
-
-    private fun getCurrentUserInfoFormSharedPref() {
-        postsViewModel.currentUserDataInfo.observe(viewLifecycleOwner) {
-        }
-    }
-
-    private fun initClicks() {
-        binding.createPostTv.setOnClickListener {
-            parentFragment?.parentFragment?.findNavController()
-                ?.navigate(R.id.homeFragmentToCreatePostFragment)
-        }
-    }
+//    private fun getCurrentUserInfo() {
+//        postsViewModel.getCurrentUserInfo(requireContext())
+//    }
+//
+//    private fun getCurrentUserInfoFormSharedPref() {
+//        postsViewModel.currentUserDataInfo.observe(viewLifecycleOwner) {
+//        }
+//    }
+//
+//    private fun initClicks() {
+//        binding.createPostTv.setOnClickListener {
+//            parentFragment?.parentFragment?.findNavController()
+//                ?.navigate(R.id.homeFragmentToCreatePostFragment)
+//        }
+//    }
 
     private fun setupPostsRecycler() {
         binding.postsRecycler.adapter = postsAdapter

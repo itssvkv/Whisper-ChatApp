@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="15dp"
-    tools:context=".ui.home.currentUserProfile.MyProfileFragment">
+    tools:context=".ui.otheruserprofile.OtherUserProfileFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/headerLayout"
@@ -31,12 +31,12 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/poppins_semi_bold"
             android:gravity="center"
-            android:text="@string/my_profile"
+            android:text="@string/profile"
             android:textColor="@color/black"
             android:textSize="20sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/backIv"
             app:layout_constraintTop_toTopOf="parent" />
 
 
@@ -97,29 +97,21 @@
             android:fontFamily="@font/poppins_semi_bold"
             android:textColor="@color/black"
             android:textSize="18sp"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/userChatIcon"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/userPhotoIv"
             tools:text="mohameed gamal" />
 
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/editProfileBottom"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/primary_button"
-            android:fontFamily="@font/poppins_semi_bold"
-            android:text="@string/edit_profile"
-            android:textAllCaps="false"
-            android:textColor="@color/white"
-            android:layout_marginTop="10dp"
-            android:textSize="18sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/userStatusTv" />
-
-
-
+        <ImageView
+            android:id="@+id/userChatIcon"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:background="@drawable/primary_container"
+            android:padding="15dp"
+            android:src="@drawable/chat"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
