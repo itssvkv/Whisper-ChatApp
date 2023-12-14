@@ -12,7 +12,7 @@ import androidx.navigation.fragment.findNavController
 import com.itssvkv.chatapp.R
 import com.itssvkv.chatapp.databinding.FragmentSearchBinding
 import com.itssvkv.chatapp.models.UserDataInfo
-import com.itssvkv.chatapp.ui.home.adapters.BaseChatsAdapter
+import com.itssvkv.chatapp.ui.home.adapters.SearchResultAdapter
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
@@ -28,7 +28,7 @@ class SearchFragment : Fragment() {
     private val searchViewModel by viewModels<SearchViewModel>()
 
     @Inject
-    lateinit var baseChatsAdapter: BaseChatsAdapter
+    lateinit var searchResultAdapter: SearchResultAdapter
 
     @Inject
     lateinit var bundle: Bundle
@@ -38,7 +38,7 @@ class SearchFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentSearchBinding.inflate(inflater, container, false)
-        binding.searchResultRecycler.adapter = baseChatsAdapter
+        binding.searchResultRecycler.adapter = searchResultAdapter
         binding.animationView.visibility = View.GONE
         init()
         return _binding?.root
@@ -51,7 +51,7 @@ class SearchFragment : Fragment() {
     }
 
     private fun goToOtherUserProfileFragment(){
-        baseChatsAdapter.onUserClickListener = {userDataInfo ->
+        searchResultAdapter.onUserClickListener = { userDataInfo ->
             bundle.putSerializable("otherUserProfile", userDataInfo)
             parentFragment?.parentFragment?.findNavController()
                 ?.navigate(R.id.homeFragmentToOtherUserProfileFragment)
@@ -96,7 +96,7 @@ class SearchFragment : Fragment() {
         lifecycleScope.launch {
             searchViewModel.sendSearchQuery(searchText = searchText).addOnSuccessListener { query ->
                 binding.animationView.visibility = View.GONE
-                baseChatsAdapter.submitList(query.toObjects(UserDataInfo::class.java))
+                searchResultAdapter.submitList(query.toObjects(UserDataInfo::class.java))
             }
         }
     }

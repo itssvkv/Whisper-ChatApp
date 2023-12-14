@@ -4,29 +4,32 @@ import android.app.Activity
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
-import com.itssvkv.chatapp.bottomsheets.updatename.UpdateNameBottomSheet
-import com.itssvkv.chatapp.bottomsheets.updatestatus.UpdateStatusBottomSheet
+import com.bumptech.glide.request.RequestOptions
 import com.itssvkv.chatapp.databinding.FragmentUpdateUserInfoBinding
 import com.itssvkv.chatapp.models.UserDataInfo
+import com.itssvkv.chatapp.utils.Common.TAG
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
 @AndroidEntryPoint
 class UpdateUserInfoFragment : Fragment() {
     private var _binding: FragmentUpdateUserInfoBinding? = null
-    private val updateNameBottomSheet by lazy { UpdateNameBottomSheet() }
-    private val updateStatusBottomSheet by lazy { UpdateStatusBottomSheet() }
     private var resultLauncher: ActivityResultLauncher<Intent>? = null
     private var imgResult: Uri? = null
     private val imgIntent by lazy { Intent() }
     private val binding get() = _binding!!
+    private val updateUserInfoViewModel by viewModels<UpdateUserInfoViewModel>()
 
     @Inject
     lateinit var bundle: Bundle
@@ -51,15 +54,29 @@ class UpdateUserInfoFragment : Fragment() {
         binding.backIv.setOnClickListener {
             activity?.onBackPressedDispatcher?.onBackPressed()
         }
-        binding.nameLayout.setOnClickListener {
-            updateNameBottomSheet.show(requireActivity().supportFragmentManager, null)
+        binding.userPhotoIv.setOnClickListener {
+            resultLauncher?.launch(imgIntent)
         }
-        binding.aboutLayout.setOnClickListener {
-            updateStatusBottomSheet.show(requireActivity().supportFragmentManager, null)
+        binding.updateButton.setOnClickListener {
+            updateUserInfoViewModel.updateCurrentUserInfo(
+                name = binding.updateNameEt.text.toString().trim(),
+                userName = binding.updateUsernameEt.text.toString().trim(),
+                status = binding.updateStatusEt.text.toString().trim(),
+                context = requireContext()
+            )
         }
 
-        binding.profileIV.setOnClickListener {
-            resultLauncher?.launch(imgIntent)
+        updateUserInfoViewModel.makeToast = {
+            when(it){
+                com.itssvkv.chatapp.ui.userprofile.UpdateUserInfoViewModel.TOASTS.SUCCESS-> {
+                    Toast.makeText(requireContext(), "Upload succeed", Toast.LENGTH_SHORT).show()
+                    this@UpdateUserInfoFragment.findNavController().popBackStack()
+                }
+                com.itssvkv.chatapp.ui.userprofile.UpdateUserInfoViewModel.TOASTS.FAILURE-> {
+                    Toast.makeText(requireContext(), "Upload failed", Toast.LENGTH_SHORT).show()
+                    this@UpdateUserInfoFragment.findNavController().popBackStack()
+                }
+            }
         }
     }
 
@@ -72,19 +89,23 @@ class UpdateUserInfoFragment : Fragment() {
             registerForActivityResult(ActivityResultContracts.StartActivityForResult()){
                 if (it.resultCode == Activity.RESULT_OK){
                     imgResult = it.data?.data
-                    binding.profileIV.apply {
+                    binding.userPhotoIv.apply {
+                        Log.d(TAG, "selectImageFormGallery: $imgResult")
                         setImageURI(imgResult)
+                        updateUserInfoViewModel.uploadImageToFirebase(imgResult!!)
                     }
                 }
             }
     }
 
     private fun setupUserInfo() {
-        Glide.with(binding.profileIV.context).load(currentUserInfo?.profilePhoto)
-            .into(binding.profileIV)
-        binding.usernameTv.text = currentUserInfo?.name
-        binding.aboutUserTv.text = currentUserInfo?.status
-        binding.userPhoneTv.text = currentUserInfo?.phone
+        Glide.with(binding.userPhotoIv.context).load(currentUserInfo?.profilePhoto)
+            .apply(RequestOptions().dontTransform())
+            .into(binding.userPhotoIv)
+        binding.updateNameEt.setText(currentUserInfo?.name)
+        binding.updateUsernameEt.setText(currentUserInfo?.username)
+        binding.updateStatusEt.setText(currentUserInfo?.status)
+        binding.userPhone.text = currentUserInfo?.phone
     }
 
 }

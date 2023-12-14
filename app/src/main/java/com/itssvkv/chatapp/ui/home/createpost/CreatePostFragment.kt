@@ -14,7 +14,6 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
-import com.bumptech.glide.Glide
 import com.itssvkv.chatapp.databinding.FragmentCreatePostBinding
 import dagger.hilt.android.AndroidEntryPoint
 

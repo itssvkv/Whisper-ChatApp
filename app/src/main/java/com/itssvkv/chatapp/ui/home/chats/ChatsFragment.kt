@@ -11,7 +11,7 @@ import androidx.navigation.fragment.findNavController
 import com.itssvkv.chatapp.R
 import com.itssvkv.chatapp.databinding.FragmentChatsBinding
 import com.itssvkv.chatapp.models.ChatRoom
-import com.itssvkv.chatapp.ui.home.adapters.BaseChatsAdapter
+import com.itssvkv.chatapp.ui.home.adapters.SearchResultAdapter
 import com.itssvkv.chatapp.ui.home.adapters.RecentChatAdapter
 import com.itssvkv.chatapp.utils.Common.TAG
 import dagger.hilt.android.AndroidEntryPoint
@@ -23,7 +23,7 @@ class ChatsFragment : Fragment() {
     private val chatsViewModel by viewModels<ChatsViewModel>()
 
     @Inject
-    lateinit var baseChatsAdapter: BaseChatsAdapter
+    lateinit var searchResultAdapter: SearchResultAdapter
 
     @Inject
     lateinit var recentChatAdapter: RecentChatAdapter

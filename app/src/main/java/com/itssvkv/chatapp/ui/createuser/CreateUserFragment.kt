@@ -85,10 +85,6 @@ class CreateUserFragment : Fragment() {
                     context = requireContext(),
                     userInfo = userInfo
                 )
-
-//                createUserViewModel.dismissBottomSheet = {
-//                    findNavController().popBackStack()
-//                }
                 createUserViewModel.goToNextFragment = {
                     this@CreateUserFragment.findNavController()
                         .navigate(R.id.createUserFragmentToHomeFragment)
