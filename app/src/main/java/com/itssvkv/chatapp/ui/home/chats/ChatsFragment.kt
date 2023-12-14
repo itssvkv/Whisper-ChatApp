@@ -23,9 +23,6 @@ class ChatsFragment : Fragment() {
     private val chatsViewModel by viewModels<ChatsViewModel>()
 
     @Inject
-    lateinit var searchResultAdapter: SearchResultAdapter
-
-    @Inject
     lateinit var recentChatAdapter: RecentChatAdapter
 
     @Inject
@@ -38,8 +35,15 @@ class ChatsFragment : Fragment() {
         binding?.chatsRecycler?.adapter = recentChatAdapter
         setupRecentChatAdapter()
         openRootChat()
+        initClicks()
         // Inflate the layout for this fragment
         return binding?.root
+    }
+
+    private fun initClicks(){
+        binding?.backIv?.setOnClickListener {
+            activity?.onBackPressedDispatcher?.onBackPressed()
+        }
     }
 
     private fun setupRecentChatAdapter() {

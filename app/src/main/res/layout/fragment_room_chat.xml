@@ -4,15 +4,16 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/onBoardingBtnColor"
+
     tools:context=".ui.roomchat.RoomChatFragment">
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/headerLayout"
         android:layout_width="match_parent"
-        android:layout_height="150dp"
+        android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
+        android:layout_margin="15dp"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -30,8 +31,8 @@
             android:id="@+id/profileIV"
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:scaleType="fitXY"
             android:layout_marginStart="10dp"
+            android:scaleType="fitXY"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@id/backIv"
             app:layout_constraintTop_toTopOf="parent"
@@ -49,46 +50,39 @@
             app:layout_constraintStart_toEndOf="@+id/profileIV"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="@string/search" />
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="15dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/profileIV"
+            android:background="@color/onPrimary"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/view"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/chatMessageRecycler"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginTop="120dp"
-        android:background="@drawable/dialog_bg"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:padding="4dp"
+        android:layout_marginHorizontal="15dp"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintBottom_toTopOf="@+id/searchView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:padding="15dp">
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/chatMessageRecycler"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:reverseLayout="true"
-            android:layout_marginBottom="80dp"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
+        app:layout_constraintTop_toBottomOf="@+id/headerLayout"
+        app:reverseLayout="true" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/searchView"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:layout_marginHorizontal="16dp"
-        android:layout_marginTop="16dp"
-
-        android:layout_marginBottom="45dp"
-        android:background="@drawable/search_view_bg"
-        android:paddingHorizontal="8dp"
+        android:paddingHorizontal="15dp"
+        android:background="@drawable/secondary_container"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent">
 
         <EditText
@@ -99,33 +93,22 @@
             android:layout_marginEnd="5dp"
             android:background="@android:color/transparent"
             android:hint="@string/enter_your_message_here"
-            android:textColor="@color/dots"
+            android:textColor="@color/onPrimary"
+            android:fontFamily="@font/poppins_regular"
             android:textCursorDrawable="@null"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/viewSendMessage"
+            app:layout_constraintEnd_toStartOf="@id/sendMessageIcon"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <View
-            android:id="@+id/viewSendMessage"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_marginStart="5dp"
-            android:background="@drawable/send_message_view"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/sendMessageEt"
             app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
             android:id="@+id/sendMessageIcon"
-            android:layout_width="25dp"
-            android:layout_height="25dp"
-            android:src="@drawable/send_message"
-            app:layout_constraintBottom_toBottomOf="@+id/viewSendMessage"
-            app:layout_constraintEnd_toEndOf="@+id/viewSendMessage"
-            app:layout_constraintStart_toStartOf="@+id/viewSendMessage"
-            app:layout_constraintTop_toTopOf="@+id/viewSendMessage" />
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:src="@drawable/send"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

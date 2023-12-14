@@ -1,6 +1,8 @@
 package com.itssvkv.chatapp.ui.home.currentUserProfile
 
+import android.graphics.Rect
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -8,10 +10,14 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.bumptech.glide.Glide
 import com.itssvkv.chatapp.R
 import com.itssvkv.chatapp.databinding.FragmentSettingsBinding
 import com.itssvkv.chatapp.models.UserDataInfo
+import com.itssvkv.chatapp.ui.home.adapters.OneUserPostsAdapter
+import com.itssvkv.chatapp.utils.Common.TAG
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -22,6 +28,8 @@ class MyProfileFragment : Fragment() {
     private var _binding: FragmentSettingsBinding? = null
     private val myProfileViewModel by viewModels<MyProfileViewModel>()
     private var currentUserInfo: UserDataInfo? = null
+    private lateinit var oneUserPostsAdapter: OneUserPostsAdapter
+    private lateinit var staggeredGridLayoutManager: StaggeredGridLayoutManager
     val binding get() = _binding!!
 
     @Inject
@@ -33,6 +41,7 @@ class MyProfileFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentSettingsBinding.inflate(inflater, container, false)
+        oneUserPostsAdapter = OneUserPostsAdapter()
         init()
         return _binding?.root
     }
@@ -41,8 +50,49 @@ class MyProfileFragment : Fragment() {
         getUserInfo()
         setupUserInfo()
         initClicks()
+        setupOneUserPostsRecycler()
+        setDataToOneUserPostAdapter()
     }
 
+
+    private fun setDataToOneUserPostAdapter(){
+        myProfileViewModel.allPostsForOneUserLiveData.observe(viewLifecycleOwner){
+            Log.d(TAG, "setupOneUserPostsRecycler: $it")
+            oneUserPostsAdapter.submitList(it)
+        }
+    }
+
+
+    private fun setupOneUserPostsRecycler() {
+        staggeredGridLayoutManager =
+            StaggeredGridLayoutManager(3, StaggeredGridLayoutManager.VERTICAL)
+        staggeredGridLayoutManager.gapStrategy = StaggeredGridLayoutManager.GAP_HANDLING_NONE
+        staggeredGridLayoutManager.gapStrategy =
+            StaggeredGridLayoutManager.GAP_HANDLING_MOVE_ITEMS_BETWEEN_SPANS
+        binding.userProfilePostsRecycler.apply {
+            layoutManager = staggeredGridLayoutManager
+            adapter = oneUserPostsAdapter
+            addItemDecoration(object : RecyclerView.ItemDecoration() {
+                override fun getItemOffsets(
+                    outRect: Rect,
+                    view: View,
+                    parent: RecyclerView,
+                    state: RecyclerView.State
+                ) {
+                    super.getItemOffsets(outRect, view, parent, state)
+                    val space = 10
+                    outRect.left = space - 2
+                    outRect.right = space - 2
+                    outRect.bottom = space
+                    outRect.top = space
+
+
+                }
+            })
+            setHasFixedSize(true)
+        }
+
+    }
     private fun getUserInfo() {
         lifecycleScope.launch {
             myProfileViewModel.getCurrentUserFromSharedPref(requireContext())

@@ -69,4 +69,5 @@
     <string name="num_following">87\nFollowing</string>
     <string name="edit_profile">Edit Profile</string>
     <string name="my_profile">My Profile</string>
+    <string name="home">Home</string>
 </resources>

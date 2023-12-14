@@ -1,1 +1,1 @@
-package com.itssvkv.chatapp.utilsobject Common {    const val TAG = "hhhhhhh"    enum class STATUS {        EMPTY,        LOADING,        SUCCESS,        FAILURE    }}
+package com.itssvkv.chatapp.utilsobject Common {    const val TAG = "hhhhhhh"}

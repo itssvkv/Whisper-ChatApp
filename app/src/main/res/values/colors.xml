@@ -9,6 +9,7 @@
     <color name="onBoardingBtnColor">#4a6d88</color>
     <color name="editText">#E8E6E6</color>
     <color name="primary">#006175</color>
+    <color name="secondary">#F2F2F2</color>
     <color name="onPrimary">#B3000000</color>
     <color name="onPrimaryContainer">#80000000</color>
     <color name="postsPrimaryContainer">#33C4C4C4</color>

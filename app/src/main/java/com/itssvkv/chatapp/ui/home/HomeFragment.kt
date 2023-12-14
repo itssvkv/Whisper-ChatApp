@@ -16,19 +16,14 @@ import dagger.hilt.android.AndroidEntryPoint
 class HomeFragment : Fragment() {
 
     private var binding: FragmentHomeBinding? = null
-    private val homeViewModel by viewModels<HomeViewModel>()
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentHomeBinding.inflate(inflater, container, false)
-//        getDataFromFirebase()
-//        observeOnFirebaseData()
         setupNavigation()
         return binding?.root
     }
-
 
     private fun setupNavigation() {
         val hostFragment =
@@ -36,22 +31,4 @@ class HomeFragment : Fragment() {
         val navController = hostFragment.navController
         binding?.bottomNavigation?.setupWithNavController(navController)
     }
-//    private fun getDataFromFirebase() {
-//        lifecycleScope.launch {
-//            homeViewModel.getDataFromFirebase()
-//        }
-//    }
-//
-//    private fun observeOnFirebaseData() {
-//        lifecycleScope.launch {
-//            homeViewModel.userInfo.observe(viewLifecycleOwner) { task ->
-//                val name = task.result.get("name") as String
-//                val image = task.result.get("profilePhoto")
-//                binding?.helloMessage?.text = resources.getString(
-//                    R.string.helloMessage, name
-//                )
-//                Glide.with(requireContext()).load(image).into(binding?.image!!)
-//            }
-//        }
-//    }
 }

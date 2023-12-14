@@ -6,7 +6,7 @@
         android:title="" />
     <item
         android:id="@+id/searchFragment"
-        android:icon="@drawable/search_icon"
+        android:icon="@drawable/nav_search"
         android:title="" />
     <item
         android:id="@+id/createPostFragment2"
