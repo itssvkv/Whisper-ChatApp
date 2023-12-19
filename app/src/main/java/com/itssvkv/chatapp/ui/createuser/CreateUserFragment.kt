@@ -79,6 +79,7 @@ class CreateUserFragment : Fragment() {
                     profilePhoto = downloadImage.toString(),
                     id = userId,
                     username = binding.createUsernameEt.text.toString()
+
                 )
                 Log.d(Common.TAG, "initClicks: $userInfo")
                 createUserViewModel.setDataToFirebase(

@@ -8,7 +8,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
@@ -19,7 +18,6 @@ import com.itssvkv.chatapp.models.UserDataInfo
 import com.itssvkv.chatapp.ui.home.adapters.OneUserPostsAdapter
 import com.itssvkv.chatapp.utils.Common.TAG
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -47,30 +45,36 @@ class MyProfileFragment : Fragment() {
     }
 
     private fun init() {
-        getUserInfo()
         setupUserInfo()
         initClicks()
         setupOneUserPostsRecycler()
         setDataToOneUserPostAdapter()
+
     }
 
 
-    private fun setDataToOneUserPostAdapter(){
-        myProfileViewModel.allPostsForOneUserLiveData.observe(viewLifecycleOwner){
+    private fun setDataToOneUserPostAdapter() {
+        myProfileViewModel.allPostsForOneUserLiveData.observe(viewLifecycleOwner) {
+            setNumberOfPosts(it.size)
             Log.d(TAG, "setupOneUserPostsRecycler: $it")
             oneUserPostsAdapter.submitList(it)
         }
     }
 
 
+
+    private fun setNumberOfPosts(numberOfPosts: Int) {
+        binding.numPosts.text = resources.getString(R.string.num_posts, numberOfPosts)
+    }
+
+
     private fun setupOneUserPostsRecycler() {
-        staggeredGridLayoutManager =
-            StaggeredGridLayoutManager(3, StaggeredGridLayoutManager.VERTICAL)
-        staggeredGridLayoutManager.gapStrategy = StaggeredGridLayoutManager.GAP_HANDLING_NONE
-        staggeredGridLayoutManager.gapStrategy =
-            StaggeredGridLayoutManager.GAP_HANDLING_MOVE_ITEMS_BETWEEN_SPANS
+//        staggeredGridLayoutManager =
+//            StaggeredGridLayoutManager(3, StaggeredGridLayoutManager.VERTICAL)
+//        staggeredGridLayoutManager.gapStrategy = StaggeredGridLayoutManager.GAP_HANDLING_NONE
+//        staggeredGridLayoutManager.gapStrategy =
+//            StaggeredGridLayoutManager.GAP_HANDLING_MOVE_ITEMS_BETWEEN_SPANS
         binding.userProfilePostsRecycler.apply {
-            layoutManager = staggeredGridLayoutManager
             adapter = oneUserPostsAdapter
             addItemDecoration(object : RecyclerView.ItemDecoration() {
                 override fun getItemOffsets(
@@ -93,11 +97,6 @@ class MyProfileFragment : Fragment() {
         }
 
     }
-    private fun getUserInfo() {
-        lifecycleScope.launch {
-            myProfileViewModel.getCurrentUserFromSharedPref(requireContext())
-        }
-    }
 
     private fun setupUserInfo() {
         myProfileViewModel.currentUserDataInfo.observe(viewLifecycleOwner) { userInfo ->
@@ -109,8 +108,27 @@ class MyProfileFragment : Fragment() {
             binding.userStatusTv.text = userInfo.status
             binding.userUsernameTv.text = userInfo.username
 
+            if (userInfo.following == null) {
+                binding.numFollowing.text =
+                    resources.getString(R.string.num_following, 0)
+            } else {
+                binding.numFollowing.text =
+                    resources.getString(R.string.num_following, userInfo.following.size)
+            }
+
+            if (userInfo.followers == null) {
+                binding.numFollowers.text =
+                    resources.getString(R.string.num_followers, 0)
+            } else {
+
+                binding.numFollowers.text =
+                    resources.getString(R.string.num_followers, userInfo.followers.size)
+            }
+
         }
+
     }
+
 
     private fun initClicks() {
         binding.backIv.setOnClickListener {
