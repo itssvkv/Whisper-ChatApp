@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.itssvkv.chatapp.databinding.FragmentPostsBinding
@@ -22,7 +23,7 @@ class PostsFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentPostsBinding.inflate(inflater, container, false)
-        postsAdapter = PostsAdapter()
+        postsAdapter = PostsAdapter(requireContext())
         init()
         return _binding?.root
     }
@@ -30,6 +31,9 @@ class PostsFragment : Fragment() {
     private fun init() {
         setupPostsRecycler()
         setDataToPostsAdapter()
+        setCurrentUserInfoToAdapter()
+        whenLikeIconClicked()
+        makeToasts()
 
     }
 
@@ -41,6 +45,27 @@ class PostsFragment : Fragment() {
     private fun setDataToPostsAdapter() {
         postsViewModel.allPostsLiveData.observe(viewLifecycleOwner) { posts ->
             postsAdapter.submitList(posts)
+        }
+    }
+
+    private fun whenLikeIconClicked(){
+        postsAdapter.whenLikeIconClicked={
+            postsViewModel.whenLikeIconClicked(it)
+        }
+    }
+
+    private fun makeToasts(){
+        postsViewModel.makeToast={
+            when(it){
+                PostsViewModel.TOASTS.SUCCESS-> Toast.makeText(requireContext(), "Like add", Toast.LENGTH_SHORT).show()
+                PostsViewModel.TOASTS.FAILURE-> Toast.makeText(requireContext(), "Like failed", Toast.LENGTH_SHORT).show()
+            }
+        }
+    }
+
+    private fun setCurrentUserInfoToAdapter(){
+        postsViewModel.currentUserDataInfoLiveData.observe(viewLifecycleOwner){
+            postsAdapter.setCurrentUserInfoToAdapter(it)
         }
     }
 
