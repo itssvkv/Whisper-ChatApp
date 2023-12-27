@@ -61,7 +61,7 @@
     <string name="personal_information">Personal Information</string>
     <string name="full_name">Full name</string>
     <string name="username">Username</string>
-    <string name="postsLikesCount">Liked by %1$s and %2$d others</string>
+    <string name="postsLikesCount">Liked by %1$s %2$s</string>
     <string name="select_image">Select Image</string>
     <string name="add_caption">Add caption</string>
     <string name="upload">Upload</string>

@@ -107,17 +107,16 @@
             android:id="@+id/editProfileBottom"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
             android:background="@drawable/primary_button"
             android:fontFamily="@font/poppins_semi_bold"
             android:text="@string/edit_profile"
             android:textAllCaps="false"
             android:textColor="@color/white"
-            android:layout_marginTop="10dp"
             android:textSize="18sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/userStatusTv" />
-
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
@@ -150,8 +149,8 @@
             android:id="@+id/firstView"
             android:layout_width="1dp"
             android:layout_height="45dp"
-            android:background="@color/black"
             android:layout_marginStart="25dp"
+            android:background="@color/black"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/numFollowing"
             app:layout_constraintStart_toEndOf="@+id/numPosts"
@@ -205,12 +204,12 @@
         android:id="@+id/userPostsTv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
         android:fontFamily="@font/poppins_semi_bold"
         android:gravity="center"
         android:text="@string/posts"
         android:textColor="@color/black"
         android:textSize="20sp"
-        android:layout_marginTop="20dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/userFollowingInfo" />
 
@@ -219,12 +218,35 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginTop="8dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:spanCount="3"
         app:layoutManager="androidx.recyclerview.widget.StaggeredGridLayoutManager"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/userPostsTv" />
+        app:layout_constraintTop_toBottomOf="@+id/userPostsTv"
+        app:spanCount="3" />
 
+
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/loadingAnimation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/userPostsTv"
+        app:lottie_autoPlay="true"
+        app:lottie_loop="true"
+        app:lottie_rawRes="@raw/circle_loading_anim" />
+
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/noResultAnimation"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/userPostsTv"
+        app:lottie_autoPlay="true"
+        app:lottie_rawRes="@raw/no_result_found" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

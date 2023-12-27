@@ -40,6 +40,7 @@ class SearchFragment : Fragment() {
         _binding = FragmentSearchBinding.inflate(inflater, container, false)
         binding.searchResultRecycler.adapter = searchResultAdapter
         binding.animationView.visibility = View.GONE
+        binding.searchAnimation.visibility = View.VISIBLE
         init()
         return _binding?.root
     }
@@ -74,14 +75,17 @@ class SearchFragment : Fragment() {
                 setupBaseChatsAdapter(searchInput)
                 binding.animationView.visibility = View.GONE
                 binding.searchResultRecycler.visibility = View.VISIBLE
+                binding.searchAnimation.visibility = View.GONE
             },
             emptyAction = {
                 binding.animationView.visibility = View.GONE
                 binding.searchResultRecycler.visibility = View.GONE
+                binding.searchAnimation.visibility = View.VISIBLE
             },
             loading = {
                 binding.searchResultRecycler.visibility = View.GONE
                 binding.animationView.visibility = View.VISIBLE
+                binding.searchAnimation.visibility = View.GONE
             },
             duration = 1000
         )
@@ -107,6 +111,7 @@ class SearchFragment : Fragment() {
         loading: (() -> Unit)? = null,
         duration: Long
     ) {
+        binding.searchEt.requestFocusFromTouch()
         binding.searchEt.doAfterTextChanged { text ->
             searchJob?.cancel()
             if (text.toString().isNotEmpty()) {

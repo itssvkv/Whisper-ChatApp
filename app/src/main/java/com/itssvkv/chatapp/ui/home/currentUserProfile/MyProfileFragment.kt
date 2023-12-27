@@ -49,6 +49,8 @@ class MyProfileFragment : Fragment() {
         initClicks()
         setupOneUserPostsRecycler()
         setDataToOneUserPostAdapter()
+        showOrHideLoadingAnimation()
+        showOrHideNoResultAnimation()
 
     }
 
@@ -138,6 +140,37 @@ class MyProfileFragment : Fragment() {
             bundle.putSerializable("currentUserInfo", currentUserInfo)
             parentFragment?.parentFragment?.findNavController()
                 ?.navigate(R.id.homeFragmentToUpdateFragment)
+        }
+    }
+
+    private fun showOrHideLoadingAnimation() {
+        myProfileViewModel.loadingAnimLiveData.observe(viewLifecycleOwner) {
+            when (it) {
+                true -> {
+                    binding.loadingAnimation.visibility = View.VISIBLE
+                    binding.userProfilePostsRecycler.visibility = View.GONE
+                }
+
+                false -> {
+                    binding.loadingAnimation.visibility = View.GONE
+                    binding.userProfilePostsRecycler.visibility = View.VISIBLE
+                }
+            }
+        }
+    }
+    private fun showOrHideNoResultAnimation() {
+        myProfileViewModel.noResultAnimLiveData.observe(viewLifecycleOwner) {
+            when (it) {
+                true -> {
+                    binding.noResultAnimation.visibility = View.VISIBLE
+                    binding.userProfilePostsRecycler.visibility = View.GONE
+                }
+
+                false -> {
+                    binding.noResultAnimation.visibility = View.GONE
+                    binding.userProfilePostsRecycler.visibility = View.VISIBLE
+                }
+            }
         }
     }
 

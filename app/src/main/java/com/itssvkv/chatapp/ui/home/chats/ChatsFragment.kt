@@ -11,7 +11,6 @@ import androidx.navigation.fragment.findNavController
 import com.itssvkv.chatapp.R
 import com.itssvkv.chatapp.databinding.FragmentChatsBinding
 import com.itssvkv.chatapp.models.ChatRoom
-import com.itssvkv.chatapp.ui.home.adapters.SearchResultAdapter
 import com.itssvkv.chatapp.ui.home.adapters.RecentChatAdapter
 import com.itssvkv.chatapp.utils.Common.TAG
 import dagger.hilt.android.AndroidEntryPoint
@@ -19,7 +18,8 @@ import javax.inject.Inject
 
 @AndroidEntryPoint
 class ChatsFragment : Fragment() {
-    private var binding: FragmentChatsBinding? = null
+    private var _binding: FragmentChatsBinding? = null
+    private val binding get() = _binding!!
     private val chatsViewModel by viewModels<ChatsViewModel>()
 
     @Inject
@@ -31,17 +31,19 @@ class ChatsFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentChatsBinding.inflate(inflater, container, false)
-        binding?.chatsRecycler?.adapter = recentChatAdapter
+        _binding = FragmentChatsBinding.inflate(inflater, container, false)
+        binding.chatsRecycler.adapter = recentChatAdapter
         setupRecentChatAdapter()
         openRootChat()
         initClicks()
+        showOrHideLoadingAnimation()
+        showOrHideNoChatAnimation()
         // Inflate the layout for this fragment
-        return binding?.root
+        return _binding?.root
     }
 
-    private fun initClicks(){
-        binding?.backIv?.setOnClickListener {
+    private fun initClicks() {
+        binding.backIv.setOnClickListener {
             activity?.onBackPressedDispatcher?.onBackPressed()
         }
     }
@@ -69,6 +71,38 @@ class ChatsFragment : Fragment() {
         chatsViewModel.updateChatRooms()
     }
 
+
+    private fun showOrHideLoadingAnimation() {
+        chatsViewModel.loadingAnimLiveData.observe(viewLifecycleOwner) {
+            when (it) {
+                true -> {
+                    binding.loadingAnimation.visibility = View.VISIBLE
+                    binding.chatsRecycler.visibility = View.GONE
+                }
+
+                false -> {
+                    binding.loadingAnimation.visibility = View.GONE
+                    binding.chatsRecycler.visibility = View.VISIBLE
+                }
+            }
+        }
+    }
+
+    private fun showOrHideNoChatAnimation() {
+        chatsViewModel.noChatAnimLiveData.observe(viewLifecycleOwner) {
+            when (it) {
+                true -> {
+                    binding.emptyMailAnimation.visibility = View.VISIBLE
+                    binding.chatsRecycler.visibility = View.GONE
+                }
+
+                false -> {
+                    binding.emptyMailAnimation.visibility = View.GONE
+                    binding.chatsRecycler.visibility = View.VISIBLE
+                }
+            }
+        }
+    }
 }
 
 

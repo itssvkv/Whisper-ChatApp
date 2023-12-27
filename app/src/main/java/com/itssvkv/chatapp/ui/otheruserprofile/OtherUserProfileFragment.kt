@@ -52,6 +52,8 @@ class OtherUserProfileFragment : Fragment() {
         makeToasts()
         setDataToOneUserPostAdapter()
         setupOneUserPostsRecycler()
+        showOrHideLoadingAnimation()
+        showOrHideNoResultAnimation()
     }
 
     private fun initClicks() {
@@ -130,11 +132,11 @@ class OtherUserProfileFragment : Fragment() {
 
 
     private fun setupOneUserPostsRecycler() {
-        staggeredGridLayoutManager =
-            StaggeredGridLayoutManager(3, StaggeredGridLayoutManager.VERTICAL)
-        staggeredGridLayoutManager.gapStrategy = StaggeredGridLayoutManager.GAP_HANDLING_NONE
-        staggeredGridLayoutManager.gapStrategy =
-            StaggeredGridLayoutManager.GAP_HANDLING_MOVE_ITEMS_BETWEEN_SPANS
+//        staggeredGridLayoutManager =
+//            StaggeredGridLayoutManager(3, StaggeredGridLayoutManager.VERTICAL)
+//        staggeredGridLayoutManager.gapStrategy = StaggeredGridLayoutManager.GAP_HANDLING_NONE
+//        staggeredGridLayoutManager.gapStrategy =
+//            StaggeredGridLayoutManager.GAP_HANDLING_MOVE_ITEMS_BETWEEN_SPANS
         binding.userProfilePostsRecycler.apply {
             adapter = oneUserPostsAdapter
             addItemDecoration(object : RecyclerView.ItemDecoration() {
@@ -157,6 +159,37 @@ class OtherUserProfileFragment : Fragment() {
             setHasFixedSize(true)
         }
 
+    }
+
+    private fun showOrHideLoadingAnimation() {
+        otherUserProfileViewModel.loadingAnimLiveData.observe(viewLifecycleOwner) {
+            when (it) {
+                true -> {
+                    binding.loadingAnimation.visibility = View.VISIBLE
+                    binding.userProfilePostsRecycler.visibility = View.GONE
+                }
+
+                false -> {
+                    binding.loadingAnimation.visibility = View.GONE
+                    binding.userProfilePostsRecycler.visibility = View.VISIBLE
+                }
+            }
+        }
+    }
+    private fun showOrHideNoResultAnimation() {
+        otherUserProfileViewModel.noResultAnimLiveData.observe(viewLifecycleOwner) {
+            when (it) {
+                true -> {
+                    binding.noResultAnimation.visibility = View.VISIBLE
+                    binding.userProfilePostsRecycler.visibility = View.GONE
+                }
+
+                false -> {
+                    binding.noResultAnimation.visibility = View.GONE
+                    binding.userProfilePostsRecycler.visibility = View.VISIBLE
+                }
+            }
+        }
     }
 
 }

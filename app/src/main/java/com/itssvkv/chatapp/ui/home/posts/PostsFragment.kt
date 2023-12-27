@@ -34,6 +34,8 @@ class PostsFragment : Fragment() {
         setCurrentUserInfoToAdapter()
         whenLikeIconClicked()
         makeToasts()
+        showOrHideLoadingAnimation()
+        showOrHideNoResultAnimation()
 
     }
 
@@ -48,24 +50,64 @@ class PostsFragment : Fragment() {
         }
     }
 
-    private fun whenLikeIconClicked(){
-        postsAdapter.whenLikeIconClicked={
+    private fun whenLikeIconClicked() {
+        postsAdapter.whenLikeIconClicked = {
             postsViewModel.whenLikeIconClicked(it)
         }
     }
 
-    private fun makeToasts(){
-        postsViewModel.makeToast={
-            when(it){
-                PostsViewModel.TOASTS.SUCCESS-> Toast.makeText(requireContext(), "Like add", Toast.LENGTH_SHORT).show()
-                PostsViewModel.TOASTS.FAILURE-> Toast.makeText(requireContext(), "Like failed", Toast.LENGTH_SHORT).show()
+    private fun makeToasts() {
+        postsViewModel.makeToast = {
+            when (it) {
+                PostsViewModel.TOASTS.SUCCESS -> Toast.makeText(
+                    requireContext(),
+                    "Like add",
+                    Toast.LENGTH_SHORT
+                ).show()
+
+                PostsViewModel.TOASTS.FAILURE -> Toast.makeText(
+                    requireContext(),
+                    "Like failed",
+                    Toast.LENGTH_SHORT
+                ).show()
             }
         }
     }
 
-    private fun setCurrentUserInfoToAdapter(){
-        postsViewModel.currentUserDataInfoLiveData.observe(viewLifecycleOwner){
+    private fun setCurrentUserInfoToAdapter() {
+        postsViewModel.currentUserDataInfoLiveData.observe(viewLifecycleOwner) {
             postsAdapter.setCurrentUserInfoToAdapter(it)
+        }
+    }
+
+    private fun showOrHideLoadingAnimation() {
+        postsViewModel.loadingAnimLiveData.observe(viewLifecycleOwner) {
+            when (it) {
+                true -> {
+                    binding.loadingAnimation.visibility = View.VISIBLE
+                    binding.postsRecycler.visibility = View.GONE
+                }
+
+                false -> {
+                    binding.loadingAnimation.visibility = View.GONE
+                    binding.postsRecycler.visibility = View.VISIBLE
+                }
+            }
+        }
+    }
+    private fun showOrHideNoResultAnimation() {
+        postsViewModel.noResultAnimLiveData.observe(viewLifecycleOwner) {
+            when (it) {
+                true -> {
+                    binding.noResultAnimation.visibility = View.VISIBLE
+                    binding.postsRecycler.visibility = View.GONE
+                }
+
+                false -> {
+                    binding.noResultAnimation.visibility = View.GONE
+                    binding.postsRecycler.visibility = View.VISIBLE
+                }
+            }
         }
     }
 
