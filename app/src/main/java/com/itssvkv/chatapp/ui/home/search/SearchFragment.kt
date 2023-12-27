@@ -111,7 +111,7 @@ class SearchFragment : Fragment() {
         loading: (() -> Unit)? = null,
         duration: Long
     ) {
-        binding.searchEt.requestFocusFromTouch()
+
         binding.searchEt.doAfterTextChanged { text ->
             searchJob?.cancel()
             if (text.toString().isNotEmpty()) {
@@ -121,7 +121,7 @@ class SearchFragment : Fragment() {
             }
             loading?.invoke()
 
-            searchJob = if (text.toString().isEmpty()) {
+            searchJob = if(text.toString().isEmpty()) {
                 lifecycleScope.launch {
                     delay(duration)
                     emptyAction?.invoke()

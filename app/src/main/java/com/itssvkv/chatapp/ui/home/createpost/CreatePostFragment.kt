@@ -42,7 +42,6 @@ class CreatePostFragment : Fragment() {
 //        setCurrentUserInfo()
         initClicks()
         selectImage()
-
     }
 
     private fun getCurrentUserInfoFromSharedPref() {

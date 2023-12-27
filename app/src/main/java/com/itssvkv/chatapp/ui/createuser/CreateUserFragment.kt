@@ -59,8 +59,6 @@ class CreateUserFragment : Fragment() {
         initImagesClicks()
         selectImage()
         setInProgress()
-
-
     }
 
 
